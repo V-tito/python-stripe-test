@@ -28,6 +28,7 @@ STRIPE_SECRET_KEY=os.getenv('STRIPE_SECRET_KEY')
 stripe.api_key =STRIPE_SECRET_KEY
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
+REPLIT_ENDPOINT_SECRET=os.getenv('REPLIT_ENDPOINT_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -147,6 +148,6 @@ MAILERS = {
 SECURE_CSP = {
     "default-src": [CSP.SELF],
     # Add more directives to be enforced.
-    "script-src": [CSP.SELF, CSP.NONCE,"https://m.stripe.network"],
-    "frame-src":[CSP.SELF,"js.stripe.com"]
+    "script-src": [CSP.SELF, CSP.NONCE,"https://m.stripe.network",CSP.UNSAFE_INLINE,"https://js.stripe.com"],
+    "frame-src":[CSP.SELF,"js.stripe.com",CSP.UNSAFE_INLINE]
 }

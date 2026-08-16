@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from . import models
-from django.http import HttpResponseNotFound,HttpResponseNotAllowed,HttpResponseRedirect,HttpResponseServerError
+from django.http import HttpResponseNotFound,HttpResponseNotAllowed,HttpResponseRedirect,HttpResponseServerError,HttpResponseBadRequest
 from . import forms
 import stripe
 from django.conf import settings
@@ -27,6 +27,8 @@ def paymentAccepted (request):
     return TemplateResponse(request,'paymentSuccess.html')
 def paymentError (request):
      return TemplateResponse(request,'paymentError.html')
+def paymentErrorWithMessage(request,what):
+     return TemplateResponse(request,'paymentErrorWithMessage.html',{"what":what})
 def buy(request, item_id):
     if request.method=='GET':
         try:
@@ -55,7 +57,7 @@ def buyOrdered(request,order_id):
                 if orderCurrency in ['usd','rub']: #ugly way to convert, but at least it's extensible
                                  total*=100
                 intent = client.v1.payment_intents.create({"amount": int(total), "currency": orderCurrency})
-                return TemplateResponse(request,'checkout.html', {'client_secret':intent.client_secret})
+                return TemplateResponse(request,'checkout.html', {'client_secret':intent.client_secret, 'pub_key':settings.STRIPE_PUBLISHABLE_KEY})
             except ValueError:
                 HttpResponseServerError()
     else:
