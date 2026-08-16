@@ -25,7 +25,5 @@ urlpatterns = [
     path('buy_ordered/<int:order_id>',views.buyOrdered),
     path('orders/<int:order_id>',views.order),
     path('addToOrder/<int:item_id>',views.addToOrder),
-    path('paymentError/',views.paymentError),
-    path('paymentError/<str:what>',views.paymentErrorWithMessage),
     path('paymentSuccess/',views.paymentAccepted)
 ]

@@ -25,10 +25,7 @@ def item(request, item_id):
 
 def paymentAccepted (request):
     return TemplateResponse(request,'paymentSuccess.html')
-def paymentError (request):
-     return TemplateResponse(request,'paymentError.html')
-def paymentErrorWithMessage(request,what):
-     return TemplateResponse(request,'paymentErrorWithMessage.html',{"what":what})
+
 def buy(request, item_id):
     if request.method=='GET':
         try:
