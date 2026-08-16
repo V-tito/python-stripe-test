@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{order.id}}</title>
+  </head>
+  <body>
+    <h1>{{order.id}}</h1>
+    <table>
+      <tr>
+        <th>Item name</th>
+        <th>Item description</th>
+        <th>Item price</th>
+      </tr>
+      {%for item in order.items.all%}
+      <tr>
+        <td><a href="/item/{{item.id}}">{{item.name}}</a></td>
+        <td>{{item.description}}</td>
+        <td>{{item.price}} {{item.currency}}</td>
+      </tr>
+      {%endfor%}
+    </table>
+    <form action="/buy_ordered/{{order.id}}" method="get">
+      <button type="submit">Buy</button>
+    </form>
+  </body>
+</html>

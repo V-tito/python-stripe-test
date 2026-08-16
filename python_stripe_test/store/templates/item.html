@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{item.name}}</title>
+  </head>
+  <body>
+    <h1>{{item.name}}</h1>
+    <p>{{item.description}}</p>
+    <p style="font-style: bold">Price: {{item.price}} {{item.currency}}</p>
+    <form action="/buy/{{item.id}}" method="get">
+      <button type="submit">Buy</button>
+    </form>
+    <form id="add-to-order" method="POST" action="/addToOrder/{{item.id}}">
+      {% csrf_token %} {{form}}
+      <input type="submit" value="Add" />
+    </form>
+  </body>
+</html>
