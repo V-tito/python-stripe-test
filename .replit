@@ -1,0 +1,14 @@
+modules = ["python-3.12", "web", "postgresql-16"]
+run = "sh run.sh"
+entrypoint = "run.sh"
+
+[nix]
+channel = "stable-25_05"
+
+
+[env]
+POETRY_VIRTUALENVS_IN_PROJECT = "true"
+
+[deployment]
+run = "sh run.sh"
+deploymentTarget = "cloudrun"
