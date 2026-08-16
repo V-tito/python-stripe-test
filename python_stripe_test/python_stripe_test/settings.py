@@ -33,7 +33,8 @@ REPLIT_ENDPOINT_SECRET=os.getenv('REPLIT_ENDPOINT_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = [f"https://{h}" for h in os.environ.get('REPLIT_DOMAINS', '').split(',') if h]
 
 
 # Application definition
